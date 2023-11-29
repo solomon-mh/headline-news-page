@@ -52,7 +52,8 @@ export const getAvailableNewsYears = async (): Promise<string[]> => {
   const years: string[] = db
     .prepare("SELECT DISTINCT strftime('%Y', date) AS year FROM news")
     .all()
-    .map((row: any) => row.year);
+    .map((row: any) => row.year)
+    .sort((a, b) => b - a);
   await new Promise((resolve) => setTimeout(resolve, 2000));
   return years;
 };
